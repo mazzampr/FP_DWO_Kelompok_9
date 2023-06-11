@@ -82,7 +82,7 @@
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="penjualan_wilayah.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Penjualan Setiap Wilayah</span></a>
             </li>

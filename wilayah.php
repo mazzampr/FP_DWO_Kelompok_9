@@ -31,7 +31,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -58,7 +58,7 @@
                     <span>Total Pemasukan</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="wilayah.php">
                     <i class="fas fa-fw fa-building"></i>
                     <span>Wilayah</span>
@@ -167,11 +167,11 @@
                                             $password   = "";
                                             $database   = "fp_dwo_9";
                                             $mysqli     = mysqli_connect($host, $user, $password, $database);
-                                            $wilayah = mysqli_query($mysqli,"SELECT DISTINCT(territory_name) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id GROUP BY tr.territory_name ORDER BY total DESC");
+                                            $wilayah = mysqli_query($mysqli,"SELECT DISTINCT(territory_name), COUNT(fs.product_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id GROUP BY tr.territory_name ORDER BY total DESC");
                                             while($row = mysqli_fetch_array($wilayah)){
                                                 $jenis_wilayah[] = $row['territory_name'];
 
-                                                $query = mysqli_query($mysqli,"SELECT COUNT(fs.contact_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id WHERE tr.territory_name='".$row['territory_name']."'");
+                                                $query = mysqli_query($mysqli,"SELECT COUNT(fs.product_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id WHERE tr.territory_name='".$row['territory_name']."'");
                                                 $row = $query->fetch_array();
                                                 $total[] = $row['total'];
                                             };        
