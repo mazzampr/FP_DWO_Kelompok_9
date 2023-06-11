@@ -169,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                           <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                           <i class="fas fa-solid fa-box fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

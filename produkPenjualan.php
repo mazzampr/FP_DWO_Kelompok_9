@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pemsukan.php">
+                <a class="nav-link" href="pemasukan.php">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Total Pemasukan</span>
                 </a>
@@ -117,7 +117,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Pemasukan</div>
+                                                Produk Terjual</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php  
                                                 $host       = "localhost";
@@ -126,16 +126,16 @@
                                                 $database   = "fp_dwo_9";
                                                 $mysqli     = mysqli_connect($host, $user, $password, $database);
 
-                                                $sql = "SELECT SUM(line_total) as line_total from fact_sales";
+                                                $sql = "SELECT COUNT(product_id) as product_id from fact_sales";
                                                 $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
-                                                    echo "$".number_format($row2['line_total'],0,".",",");
+                                                    echo number_format($row2['product_id'],0,".",","). " Pcs";
                                                 }
                                                 ?>  
                                                 </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-solid fa-box fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -149,13 +149,37 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Jumlah Stok Produk</div>
+                                                Jumlah Penjualan Produk Tahun 2013</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT SUM(stocked_quantity) as stocked_quantity from fact_production";
+                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2013";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
-                                                    echo number_format($row2['stocked_quantity'],0,".",",");
+                                                    echo number_format($row2['product'],0,".",","). " Pcs";
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                        <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Jumlah Penjualan Produk Tahun 2014</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php
+                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2014";
+                                            $query = mysqli_query($mysqli,$sql);
+                                                while($row2=mysqli_fetch_array($query)){
+                                                    echo number_format($row2['product'],0,".",","). " Pcs";
                                                 }
                                             ?>
                                             </div>
@@ -386,6 +410,5 @@
         }
         });
     </script>
-    
 </body>
 </html>

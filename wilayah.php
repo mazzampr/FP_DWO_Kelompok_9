@@ -135,7 +135,7 @@
                                                 </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-fw fa-building fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -167,11 +167,10 @@
                                             $password   = "";
                                             $database   = "fp_dwo_9";
                                             $mysqli     = mysqli_connect($host, $user, $password, $database);
-                                            $wilayah = mysqli_query($mysqli,"SELECT DISTINCT(territory_name) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id GROUP BY tr.territory_name ORDER BY total DESC");
+                                            $wilayah = mysqli_query($mysqli,"SELECT DISTINCT(territory_name),COUNT(fs.product_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id GROUP BY tr.territory_name ORDER BY total DESC");
                                             while($row = mysqli_fetch_array($wilayah)){
                                                 $jenis_wilayah[] = $row['territory_name'];
-
-                                                $query = mysqli_query($mysqli,"SELECT COUNT(fs.contact_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id WHERE tr.territory_name='".$row['territory_name']."'");
+                                                $query = mysqli_query($mysqli,"SELECT COUNT(fs.product_id) as total FROM fact_sales fs JOIN territory tr ON fs.territory_id = tr.territory_id WHERE tr.territory_name='".$row['territory_name']."'");
                                                 $row = $query->fetch_array();
                                                 $total[] = $row['total'];
                                             };        
