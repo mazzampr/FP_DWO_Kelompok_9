@@ -143,6 +143,31 @@
                         </div>
 
                         <!-- Earnings (Monthly) Card Example -->
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Jumlah Penjualan Produk Tahun 2012</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php
+                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year='2012'";
+                                            $query = mysqli_query($mysqli,$sql);
+                                                while($row2=mysqli_fetch_array($query)){
+                                                    echo number_format($row2['product'],0,".",","). " Pcs";
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                        <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -152,7 +177,7 @@
                                                 Jumlah Penjualan Produk Tahun 2013</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2013";
+                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year='2013'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['product'],0,".",","). " Pcs";
@@ -176,7 +201,7 @@
                                                 Jumlah Penjualan Produk Tahun 2014</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2014";
+                                            $sql = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year='2014'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['product'],0,".",","). " Pcs";

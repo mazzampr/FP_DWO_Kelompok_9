@@ -126,10 +126,10 @@
                                                 $database   = "fp_dwo_9";
                                                 $mysqli     = mysqli_connect($host, $user, $password, $database);
 
-                                                $sql = "SELECT SUM(line_total) as line_total from fact_sales";
+                                                $sql = "SELECT SUM(line_total) as total_pemasukan from fact_sales where time_id<=1127" ;
                                                 $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
-                                                    echo "$".number_format($row2['line_total'],0,".",",");
+                                                    echo "$".number_format($row2['total_pemasukan'],0,".",",");
                                                 }
                                                 ?>  
                                                 </div>
@@ -141,27 +141,49 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Jumlah Stok Produk</div>
+                                                Pendapatan Tahun 2011</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT SUM(stocked_quantity) as stocked_quantity from fact_production";
+                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2011'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
-                                                    echo number_format($row2['stocked_quantity'],0,".",",");
+                                                    echo number_format($row2['total'],0,".",",");
                                                 }
                                             ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                        <i class="fa fa-shopping-basket fa-2x text-gray-300"></i>
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Pendapatan Tahun 2012</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php
+                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2012'";
+                                            $query = mysqli_query($mysqli,$sql);
+                                                while($row2=mysqli_fetch_array($query)){
+                                                    echo number_format($row2['total'],0,".",",");
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +198,7 @@
                                                 Pendapatan Tahun 2013</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT SUM(fs.line_total) total FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2013";
+                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2013'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");
@@ -200,7 +222,7 @@
                                                 Pendapatan Tahun 2014</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT SUM(fs.line_total) total FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id WHERE t.year=2014";
+                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2014'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");

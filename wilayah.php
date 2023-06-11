@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pemsukan.php">
+                <a class="nav-link" href="pemasukan.php">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Total Pemasukan</span>
                 </a>

@@ -182,9 +182,9 @@
                         <h1 class="h3 mb-0 text-gray-800">Mondrian</h1> 
                     </div>
 
-                    <!-- <div class="row">
+                    <div class="row">
                         <iframe src="http://localhost:8080/mondrian/" style="height:1000px; width:100%; border:none; align-content:center"> </iframe>
-                    </div> -->
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
