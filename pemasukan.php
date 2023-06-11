@@ -31,7 +31,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -52,7 +52,7 @@
                     <span>Produk Penjualan</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="pemasukan.php">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Total Pemasukan</span>
@@ -74,14 +74,14 @@
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="penjualan_wilayah.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Penjualan Setiap Wilayah</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="laporan-penjualan.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Penjualan Setiap Tahun</span></a>
             </li>
@@ -126,7 +126,7 @@
                                                 $database   = "fp_dwo_9";
                                                 $mysqli     = mysqli_connect($host, $user, $password, $database);
 
-                                                $sql = "SELECT SUM(line_total) as total_pemasukan from fact_sales where time_id<=1127" ;
+                                                $sql = "SELECT SUM(line_total) as total_pemasukan from fact_sales" ;
                                                 $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo "$".number_format($row2['total_pemasukan'],0,".",",");
@@ -150,7 +150,7 @@
                                                 Pendapatan Tahun 2011</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2011'";
+                                            $sql = "SELECT t.year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2011'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");
@@ -174,7 +174,7 @@
                                                 Pendapatan Tahun 2012</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2012'";
+                                            $sql = "SELECT t.year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2012'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");
@@ -198,7 +198,7 @@
                                                 Pendapatan Tahun 2013</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2013'";
+                                            $sql = "SELECT t.year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2013'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");
@@ -222,7 +222,7 @@
                                                 Pendapatan Tahun 2014</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
-                                            $sql = "SELECT t.Year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2014'";
+                                            $sql = "SELECT t.year Year, sum(fs.line_total) as total FROM fact_sales fs JOIN time t ON (t.time_id = fs.time_id) where Year='2014'";
                                             $query = mysqli_query($mysqli,$sql);
                                                 while($row2=mysqli_fetch_array($query)){
                                                     echo number_format($row2['total'],0,".",",");

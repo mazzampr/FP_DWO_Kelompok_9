@@ -31,7 +31,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -58,7 +58,7 @@
                     <span>Total Pemasukan</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="wilayah.php">
                     <i class="fas fa-fw fa-building"></i>
                     <span>Wilayah</span>
@@ -74,14 +74,14 @@
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="penjualan_wilayah.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Penjualan Setiap Wilayah</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="laporan-penjualan.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Penjualan Setiap Tahun</span></a>
             </li>
