@@ -113,6 +113,11 @@
 
                 <?php include "navbar.php";?>
 
+                        <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 ml-3">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard AdventureWorks Kelompok 9</h1>
+                </div>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -193,13 +198,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+            <?php include "footer.php";?>
             <!-- End of Footer -->
 
         </div>
