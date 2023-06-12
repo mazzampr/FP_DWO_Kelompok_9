@@ -227,11 +227,31 @@
                             <!-- Area Chart -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Produk Terjual </h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Produk Terjual Perbulan - 2012 </h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-area">
                                         <canvas id="myAreaChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Produk Terjual Perbulan - 2013 </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Produk Terjual Perbulan - 2014 </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart3"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -314,8 +334,20 @@
         $password= "";
         $database= "fp_dwo_9";
         $conn= mysqli_connect($host, $user, $password, $database);
-        $bulan = "SELECT CONCAT(MONTHNAME(t.tanggal_lengkap), ' ', YEAR(t.tanggal_lengkap)) bulan FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id GROUP BY t.month ORDER BY t.tanggal_lengkap";
-        $product = "SELECT COUNT(fs.product_id) product FROM fact_sales fs JOIN time t ON fs.time_id=t.time_id GROUP BY t.month ORDER BY t.tanggal_lengkap";
+        $bulan = "SELECT CONCAT(MONTHNAME(t.tanggal_lengkap), ' ', YEAR(t.tanggal_lengkap)) as bulan 
+                FROM fact_sales fs 
+                JOIN time t 
+                ON fs.time_id=t.time_id 
+                where t.year='2012' 
+                GROUP BY t.month 
+                ORDER BY t.month; ";
+        $product = "SELECT COUNT(fs.product_id) as product 
+        FROM fact_sales fs 
+        JOIN time t 
+        ON fs.time_id=t.time_id 
+        where t.year='2012' 
+        GROUP BY t.month 
+        ORDER BY t.month";
         $i=1;
         $query_bulan=mysqli_query($conn, $bulan);
         $jumlah_bulan = mysqli_num_rows($query_bulan);
@@ -347,6 +379,348 @@
         }
         ?>
         var ctx = document.getElementById("myAreaChart");
+        var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [<?php echo $chart_bulan; ?>],
+            datasets: [{
+            label: "Produk terjual",
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: [<?php echo $chart_product;?>],
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            layout: {
+            padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0
+            }
+            },
+            scales: {
+            xAxes: [{
+                time: {
+                unit: 'date'
+                },
+                gridLines: {
+                display: false,
+                drawBorder: false
+                },
+                ticks: {
+                maxTicksLimit: 7
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                    return '' + number_format(value);
+                }
+                },
+                gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+                }
+            }],
+            },
+            legend: {
+            display: false
+            },
+            tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+                label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                }
+            }
+            }
+        }
+        });
+    </script>
+</body>
+    <script type="text/javascript">
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+        // *     example: number_format(1234.56, 2, ',', ' ');
+        // *     return: '1 234,56'
+        number = (number + '').replace(',', '').replace(' ', '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+        }
+
+        // Area Chart Example
+        <?php
+        $host= "localhost";
+        $user= "root";
+        $password= "";
+        $database= "fp_dwo_9";
+        $conn= mysqli_connect($host, $user, $password, $database);
+        $bulan = "SELECT CONCAT(MONTHNAME(t.tanggal_lengkap), ' ', YEAR(t.tanggal_lengkap)) as bulan 
+                FROM fact_sales fs 
+                JOIN time t 
+                ON fs.time_id=t.time_id 
+                where t.year='2013' 
+                GROUP BY t.month 
+                ORDER BY t.month; ";
+        $product = "SELECT COUNT(fs.product_id) as product 
+        FROM fact_sales fs 
+        JOIN time t 
+        ON fs.time_id=t.time_id 
+        where t.year='2013' 
+        GROUP BY t.month 
+        ORDER BY t.month";
+        $i=1;
+        $query_bulan=mysqli_query($conn, $bulan);
+        $jumlah_bulan = mysqli_num_rows($query_bulan);
+        $chart_bulan="";
+        while($row=mysqli_fetch_array($query_bulan)){
+            if ($i<$jumlah_bulan) {
+              $chart_bulan.='"';
+              $chart_bulan.=$row['bulan'];
+              $chart_bulan.='",';
+              $i++;
+            }else{
+              $chart_bulan.='"';
+              $chart_bulan.=$row['bulan'];
+              $chart_bulan.='"';
+            }
+        }
+        $a=1;
+        $query_product = mysqli_query($conn, $product);
+        $jumlah_product = mysqli_num_rows($query_product);
+        $chart_product="";
+        while ($row1=mysqli_fetch_array($query_product)) {
+            if ($a<$jumlah_product) {
+                $chart_product.=$row1['product'];
+                $chart_product.=',';
+                $a++;
+            }else{
+                $chart_product.=$row1['product'];
+            }
+        }
+        ?>
+        var ctx = document.getElementById("myAreaChart2");
+        var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [<?php echo $chart_bulan; ?>],
+            datasets: [{
+            label: "Produk terjual",
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: [<?php echo $chart_product;?>],
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            layout: {
+            padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0
+            }
+            },
+            scales: {
+            xAxes: [{
+                time: {
+                unit: 'date'
+                },
+                gridLines: {
+                display: false,
+                drawBorder: false
+                },
+                ticks: {
+                maxTicksLimit: 7
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                    return '' + number_format(value);
+                }
+                },
+                gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+                }
+            }],
+            },
+            legend: {
+            display: false
+            },
+            tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+                label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                }
+            }
+            }
+        }
+        });
+    </script>
+</body>
+    <script type="text/javascript">
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+        // *     example: number_format(1234.56, 2, ',', ' ');
+        // *     return: '1 234,56'
+        number = (number + '').replace(',', '').replace(' ', '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+        }
+
+        // Area Chart Example
+        <?php
+        $host= "localhost";
+        $user= "root";
+        $password= "";
+        $database= "fp_dwo_9";
+        $conn= mysqli_connect($host, $user, $password, $database);
+        $bulan = "SELECT CONCAT(MONTHNAME(t.tanggal_lengkap), ' ', YEAR(t.tanggal_lengkap)) as bulan 
+                FROM fact_sales fs 
+                JOIN time t 
+                ON fs.time_id=t.time_id 
+                where t.year='2014' 
+                GROUP BY t.month 
+                ORDER BY t.month; ";
+        $product = "SELECT COUNT(fs.product_id) as product 
+        FROM fact_sales fs 
+        JOIN time t 
+        ON fs.time_id=t.time_id 
+        where t.year='2014' 
+        GROUP BY t.month 
+        ORDER BY t.month";
+        $i=1;
+        $query_bulan=mysqli_query($conn, $bulan);
+        $jumlah_bulan = mysqli_num_rows($query_bulan);
+        $chart_bulan="";
+        while($row=mysqli_fetch_array($query_bulan)){
+            if ($i<$jumlah_bulan) {
+              $chart_bulan.='"';
+              $chart_bulan.=$row['bulan'];
+              $chart_bulan.='",';
+              $i++;
+            }else{
+              $chart_bulan.='"';
+              $chart_bulan.=$row['bulan'];
+              $chart_bulan.='"';
+            }
+        }
+        $a=1;
+        $query_product = mysqli_query($conn, $product);
+        $jumlah_product = mysqli_num_rows($query_product);
+        $chart_product="";
+        while ($row1=mysqli_fetch_array($query_product)) {
+            if ($a<$jumlah_product) {
+                $chart_product.=$row1['product'];
+                $chart_product.=',';
+                $a++;
+            }else{
+                $chart_product.=$row1['product'];
+            }
+        }
+        ?>
+        var ctx = document.getElementById("myAreaChart3");
         var myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
