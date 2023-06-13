@@ -188,7 +188,7 @@
                     </div>
 
                     <div class="row">
-                        <iframe src="http://localhost:8080/mondrian/" style="height:1000px; width:100%; border:none; align-content:center"> </iframe>
+                        <iframe src="http://localhost:8080/mondrian/index.html" style="height:1000px; width:100%; border:none; align-content:center"> </iframe>
                     </div>
 
                 </div>
