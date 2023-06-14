@@ -1,17 +1,19 @@
 # Final Project Data Warehouse dan OLAP Kelompok 9 Par. B 2023
 
+![Gambar Dashboard](https://github.com/mazzampr/FP_DWO_Kelompok_9/assets/71395773/316471f3-1bb1-485e-b3f3-73a53ca57f85)
+
 Final Project Pengembangan Data Warehouse dan Dashboard AdventureWorks
 Dibuat oleh Kelompok 9
 Program Studi Sistem Informasi
 Fakultas Ilmu Komputer
 UPN "Veteran" Jawa Timur
 Nama Ketua :
-Moh. Azzam Priyanto (21082010068)
+- Moh. Azzam Priyanto (21082010068)
 Nama Anggota :
-Farras Hafizh Zidane (21082010058)
-Hadyan Al-Hafizh (21082010056)
-Muhammad Rafi Arganta (21082010061)
-Naufal Nur Ahmad (21082010075)
+- Farras Hafizh Zidane (21082010058)
+- Hadyan Al-Hafizh (21082010056)
+- Muhammad Rafi Arganta (21082010061)
+- Naufal Nur Ahmad (21082010075)
 
 ## Langkah-langkah yang dibutuhkan untuk menjalankan app :
 
