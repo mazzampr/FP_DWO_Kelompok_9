@@ -7,13 +7,12 @@ Dibuat oleh Kelompok 9
 Program Studi Sistem Informasi
 Fakultas Ilmu Komputer
 UPN "Veteran" Jawa Timur <br />
-Nama Ketua :
-- Moh. Azzam Priyanto (21082010068) <br />
-Nama Anggota : <br />
-- Farras Hafizh Zidane (21082010058)
-- Hadyan Al-Hafizh (21082010056)
-- Muhammad Rafi Arganta (21082010061)
-- Naufal Nur Ahmad (21082010075)
+- Anggota Kelompok :
+-- Moh. Azzam Priyanto (21082010068)
+-- Farras Hafizh Zidane (21082010058)
+-- Hadyan Al-Hafizh (21082010056)
+-- Muhammad Rafi Arganta (21082010061)
+-- Naufal Nur Ahmad (21082010075)
 
 ## Langkah-langkah yang dibutuhkan untuk menjalankan app :
 
