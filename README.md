@@ -23,6 +23,6 @@ UPN "Veteran" Jawa Timur <br />
 5. Start apache dan mysql server.
 6. Buka phpMyAdmin (localhost/phpmyadmin).
 7. Buat database dengan nama fp_dwo_9.
-8. Import file fp_dwo_9.sql ke dalam database whsakila2021.
+8. Import file fp_dwo_9.sql ke dalam database fp_dwo_9(database sebelumnya yang sudah dibuat)
 9. Download dan Extract file mondrian yang ada di projek ini ke dalam server Tomcat bawaan dari XAMPP (xampp/tomcat/webapps).
 11. Jalankan aplikasi dengan mengakses http://localhost/[nama-projek]
